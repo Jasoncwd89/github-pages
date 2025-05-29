@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doughnut GP% Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styles for better visual appeal */
+        .calculator-card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
+        }
+        .calculator-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .btn-primary {
+            background-color: #fb923c; /* Orange-400 */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #f97316; /* Orange-500 */
+        }
+        .input-field {
+            border-color: #e5e7eb; /* Gray-200 */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .input-field:focus {
+            border-color: #fb923c; /* Orange-400 */
+            box-shadow: 0 0 0 2px rgba(251, 146, 60, 0.5); /* Orange-400 with opacity */
+            outline: none;
+        }
+        .result-display {
+            background-color: #f3f4f6; /* Gray-100 */
+        }
+        .error-message {
+            color: #ef4444; /* Red-500 */
+        }
+        .success-message {
+            color: #22c55e; /* Green-500 */
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-orange-100 to-amber-200 min-h-screen flex items-center justify-center p-4">
+
+    <div class="calculator-card bg-white p-6 sm:p-8 rounded-xl w-full max-w-md">
+        <h1 class="text-2xl sm:text-3xl font-bold text-center text-orange-600 mb-6 sm:mb-8">Doughnut GP% Calculator</h1>
+
+        <div class="space-y-4 mb-6">
+            <div>
+                <label for="costPrice" class="block text-sm font-medium text-gray-700 mb-1">Cost Price (per doughnut)</label>
+                <input type="number" id="costPrice" name="costPrice" placeholder="e.g., 0.50" class="input-field mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
+            </div>
+            <div>
+                <label for="sellingPrice" class="block text-sm font-medium text-gray-700 mb-1">Selling Price (per doughnut)</label>
+                <input type="number" id="sellingPrice" name="sellingPrice" placeholder="e.g., 1.50" class="input-field mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
+            </div>
+        </div>
+
+        <button id="calculateBtn" class="btn-primary w-full py-2.5 px-4 rounded-lg font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-75 mb-6">
+            Calculate GP%
+        </button>
+
+        <div id="results" class="space-y-3 hidden">
+            <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-3">Results:</h2>
+            <div class="result-display p-3 rounded-md">
+                <p class="text-sm text-gray-600">Gross Profit (GP):</p>
+                <p id="grossProfit" class="text-lg font-semibold text-gray-900"></p>
+            </div>
+            <div class="result-display p-3 rounded-md">
+                <p class="text-sm text-gray-600">Gross Profit Percentage (GP%):</p>
+                <p id="grossProfitPercentage" class="text-lg font-semibold text-gray-900"></p>
+            </div>
+        </div>
+
+        <div id="messageArea" class="mt-4 text-center text-sm"></div>
+
+    </div>
+
+    <script>
+        // Get references to DOM elements
+        const costPriceInput = document.getElementById('costPrice');
+        const sellingPriceInput = document.getElementById('sellingPrice');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const resultsDiv = document.getElementById('results');
+        const grossProfitDisplay = document.getElementById('grossProfit');
+        const grossProfitPercentageDisplay = document.getElementById('grossProfitPercentage');
+        const messageArea = document.getElementById('messageArea');
+
+        // Add event listener to the calculate button
+        calculateBtn.addEventListener('click', () => {
+            // Clear previous messages and hide results
+            messageArea.textContent = '';
+            messageArea.className = 'mt-4 text-center text-sm'; // Reset classes
+            resultsDiv.classList.add('hidden');
+
+            // Get input values
+            const costPrice = parseFloat(costPriceInput.value);
+            const sellingPrice = parseFloat(sellingPriceInput.value);
+
+            // --- Input Validation ---
+            if (isNaN(costPrice) || isNaN(sellingPrice)) {
+                messageArea.textContent = 'Please enter valid numbers for both prices.';
+                messageArea.classList.add('error-message');
+                return;
+            }
+
+            if (costPrice < 0 || sellingPrice < 0) {
+                messageArea.textContent = 'Prices cannot be negative.';
+                messageArea.classList.add('error-message');
+                return;
+            }
+
+            if (sellingPrice === 0) {
+                 messageArea.textContent = 'Selling price cannot be zero for GP% calculation.';
+                 messageArea.classList.add('error-message');
+                 return;
+            }
+            
+            // --- Calculation ---
+            const grossProfit = sellingPrice - costPrice;
+            // GP percentage calculation
+            // If sellingPrice is 0, GP% is undefined. If sellingPrice > 0, calculate normally.
+            const grossProfitPercentage = sellingPrice > 0 ? (grossProfit / sellingPrice) * 100 : 0;
+
+
+            // --- Display Results ---
+            // Format to 2 decimal places, common for currency
+            grossProfitDisplay.textContent = grossProfit.toFixed(2);
+            grossProfitPercentageDisplay.textContent = grossProfitPercentage.toFixed(2) + '%';
+            resultsDiv.classList.remove('hidden');
+
+            // --- Additional Messaging based on GP ---
+            if (grossProfit < 0) {
+                messageArea.textContent = 'Note: You are selling at a loss.';
+                messageArea.classList.add('error-message'); // Use error styling for loss
+                grossProfitDisplay.classList.add('text-red-500');
+                grossProfitPercentageDisplay.classList.add('text-red-500');
+            } else if (grossProfit === 0) {
+                messageArea.textContent = 'Note: You are breaking even (no profit, no loss).';
+                messageArea.classList.add('text-blue-500'); // Neutral/info styling
+                grossProfitDisplay.classList.remove('text-red-500', 'success-message');
+                grossProfitPercentageDisplay.classList.remove('text-red-500', 'success-message');
+            } else {
+                messageArea.textContent = 'Calculation successful!';
+                messageArea.classList.add('success-message');
+                grossProfitDisplay.classList.remove('text-red-500');
+                grossProfitPercentageDisplay.classList.remove('text-red-500');
+                grossProfitDisplay.classList.add('success-message');
+                grossProfitPercentageDisplay.classList.add('success-message');
+            }
+        });
+
+        // Optional: Allow pressing Enter in input fields to trigger calculation
+        [costPriceInput, sellingPriceInput].forEach(input => {
+            input.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Prevent form submission if it were in a form
+                    calculateBtn.click();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
