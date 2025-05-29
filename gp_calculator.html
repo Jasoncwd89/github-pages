@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doughnut GP% Calculator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Doughnut GP% Calculator</title> <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -23,14 +22,14 @@
             transition: background-color 0.3s ease;
         }
         .btn-primary:hover {
-            background-color: #b30f26; /* Slightly darker for hover - adjust if needed */
+            background-color: #b30f26; /* Darker shade for hover */
         }
         .input-field {
             border-color: #e5e7eb; /* Gray-200 */
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .input-field:focus {
-            border-color: #fb923c; /* Orange-400 - This is for the focus ring of inputs */
+            border-color: #fb923c; /* Orange-400 - Retaining orange for input focus for contrast */
             box-shadow: 0 0 0 2px rgba(251, 146, 60, 0.5); /* Orange-400 with opacity */
             outline: none;
         }
@@ -49,23 +48,20 @@
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-orange-100 to-amber-200 min-h-screen flex items-center justify-center p-4">
+<body class="bg-white min-h-screen flex items-center justify-center p-4">
 
     <div class="calculator-card bg-white p-6 sm:p-8 rounded-xl w-full max-w-md">
-        <h1 class="text-2xl sm:text-3xl font-bold text-center text-orange-600 mb-6 sm:mb-8">Doughnut GP% Calculator</h1>
-
-        <div class="space-y-4 mb-6">
+        <h1 class="text-2xl sm:text-3xl font-bold text-center text-[#006939] mb-6 sm:mb-8">Doughnut GP% Calculator</h1> <div class="space-y-4 mb-6">
             <div>
                 <label for="costPriceExVAT" class="block text-sm font-medium text-gray-700 mb-1">Cost Price (per doughnut)</label>
-                <input type="number" id="costPriceExVAT" name="costPriceExVAT" placeholder="e.g., 0.50" class="input-field mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
+                <input type="number" id="costPriceExVAT" name="costPriceExVAT" placeholder="e.g., 1.38" class="input-field mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
             </div>
             <div>
                 <label for="sellingPriceIncVAT" class="block text-sm font-medium text-gray-700 mb-1">Selling Price Incl Vat (per doughnut)</label>
-                <input type="number" id="sellingPriceIncVAT" name="sellingPriceIncVAT" placeholder="e.g., 1.73" class="input-field mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
+                <input type="number" id="sellingPriceIncVAT" name="sellingPriceIncVAT" placeholder="e.g., 16.9" class="input-field mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
             </div>
             <div>
-                <label for="sellingPriceExVATDisplay" class="block text-sm font-medium text-gray-700 mb-1">Selling Price Excl Vat (per doughnut)</label>
-                <input type="text" id="sellingPriceExVATDisplay" name="sellingPriceExVATDisplay" readonly class="display-field mt-1 block w-full px-3 py-2 border rounded-md shadow-sm sm:text-sm text-gray-600" placeholder="Calculated automatically">
+                <label for="sellingPriceExVATDisplay" class="block text-sm font-medium text-gray-700 mb-1">Selling Price Excl Vat (per doughnut)</label> <input type="text" id="sellingPriceExVATDisplay" name="sellingPriceExVATDisplay" readonly class="display-field mt-1 block w-full px-3 py-2 border rounded-md shadow-sm sm:text-sm text-gray-600" placeholder="Calculated automatically">
             </div>
         </div>
 
