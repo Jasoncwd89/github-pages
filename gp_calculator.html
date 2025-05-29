@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doughnut GP% Calculator (with VAT)</title>
+    <title>Doughnut GP% Calculator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -52,19 +52,19 @@
 <body class="bg-gradient-to-br from-orange-100 to-amber-200 min-h-screen flex items-center justify-center p-4">
 
     <div class="calculator-card bg-white p-6 sm:p-8 rounded-xl w-full max-w-md">
-        <h1 class="text-2xl sm:text-3xl font-bold text-center text-orange-600 mb-6 sm:mb-8">Doughnut GP% Calculator (VAT)</h1>
+        <h1 class="text-2xl sm:text-3xl font-bold text-center text-orange-600 mb-6 sm:mb-8">Doughnut GP% Calculator</h1>
 
         <div class="space-y-4 mb-6">
             <div>
-                <label for="costPriceExVAT" class="block text-sm font-medium text-gray-700 mb-1">Cost Price (per doughnut, ex. VAT)</label>
+                <label for="costPriceExVAT" class="block text-sm font-medium text-gray-700 mb-1">Cost Price (per doughnut)</label>
                 <input type="number" id="costPriceExVAT" name="costPriceExVAT" placeholder="e.g., 0.50" class="input-field mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
             </div>
             <div>
-                <label for="sellingPriceIncVAT" class="block text-sm font-medium text-gray-700 mb-1">Selling Price (per doughnut, inc. VAT 15%)</label>
+                <label for="sellingPriceIncVAT" class="block text-sm font-medium text-gray-700 mb-1">Selling Price Incl Vat (per doughnut)</label>
                 <input type="number" id="sellingPriceIncVAT" name="sellingPriceIncVAT" placeholder="e.g., 1.73" class="input-field mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
             </div>
             <div>
-                <label for="sellingPriceExVATDisplay" class="block text-sm font-medium text-gray-700 mb-1">Selling Price (per doughnut, ex. VAT)</label>
+                <label for="sellingPriceExVATDisplay" class="block text-sm font-medium text-gray-700 mb-1">Selling Price Excl Vat(per doughnut)</label>
                 <input type="text" id="sellingPriceExVATDisplay" name="sellingPriceExVATDisplay" readonly class="display-field mt-1 block w-full px-3 py-2 border rounded-md shadow-sm sm:text-sm text-gray-600" placeholder="Calculated automatically">
             </div>
         </div>
